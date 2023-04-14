@@ -84,18 +84,18 @@ const run = async () => {
     });
 
     //USERS
-    app.get("/user", verifyJWT, verifyAdmin, async (req, res) => {
+    app.get("/user", async (req, res) => {
       const users = await userCollection.find().toArray();
       res.send(users);
     });
-    app.delete("/user/:email", verifyJWT, verifyAdmin, async (req, res) => {
+    app.delete("/user/:email", async (req, res) => {
       const email = req.params.email;
       const filter = { email: email };
       const users = await userCollection.deleteOne(filter);
       res.send(users);
     });
 
-    app.put("/user/admin/:email", verifyJWT, verifyAdmin, async (req, res) => {
+    app.put("/user/admin/:email", async (req, res) => {
       const email = req.params.email;
       const filter = { email: email };
       const updateDoc = {
